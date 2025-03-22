@@ -29,4 +29,3 @@ def solution():
         words = line.split()
         if words[1][0] in check:
             print(line)
-print('casa')
