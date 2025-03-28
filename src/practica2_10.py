@@ -1,16 +1,30 @@
-import roundsdb
+from src import roundsdb
 
 rounds = roundsdb.rounds
+players = {}
 
-def solution():
-    # Inicio diccionario con jugadores y puntajes iniciales
-    players = {}
+# Inicio diccionario con jugadores y puntajes iniciales
+def stats_init(players):
     for round in rounds:
         for name in round:
             players[name] = {'kills': 0, 'assists': 0, 'deaths': 0, 'mvp': 0, 'points': 0}
-    # for anidado por rondas, luego itera por items de cada ronda 
-    # almacenando key y value que finalmente permite accede a los valores 
-    # y hacer las operaciones
+print('Ejecutando fuera init')
+    
+def process_round():
+    for player, value in round.items():
+            players[player]['kills'] += value['kills']
+            players[player]['assists'] += value['assists']
+            round_score = value['kills'] * 3 + value['assists']
+            # Evalua el valor 'deaths' y agrega a puntajes y estadisticas
+            if value['deaths'] == True:
+                players[player]['deaths'] += 1
+                round_score -= 1      
+            players[player]['points'] += round_score
+        
+# for anidado por rondas, luego itera por items de cada ronda 
+# almacenando key y value que finalmente permite acceder a los valores 
+# y hacer las operaciones
+def main():
     for i,round in enumerate(rounds):
         #Reinicio scores y mvp por ronda
         score_max = 0
@@ -18,18 +32,11 @@ def solution():
         mvp = None
         round = rounds[i]
         # Recorre por clave valor los items de round y asigna puntajes y estadisticas
-        for player, value in round.items():
-            players[player]['kills'] += value['kills']
-            players[player]['assists'] += value['assists']
-            round_score = value['kills'] * 3 + value['assists']
-            if value['deaths'] == True:
-                players[player]['deaths'] += 1
-                round_score -= 1      
-            players[player]['points'] += round_score
-            # Evalua si es MVP de la ronda
-            if round_score > score_max:
-                score_max = round_score
-                mvp = player
+        process_round()
+        # Evalua si es MVP de la ronda
+        if round_score > score_max:
+            score_max = round_score
+            mvp = player
         #finalizada la ronda se registra el mvp, se ordena la informacion y se imprime el score
         players[mvp]['mvp'] += 1
         print((f'Marcador al finalizar ronda {i+1}').center(60))
@@ -40,4 +47,5 @@ def solution():
         for player, stats in final_score:
             print(f'''{player:8} {stats['kills']:>6}{stats['assists']:>13}{stats['deaths']:>12}{stats['mvp']:>11}{stats['points']:>13}''')
         print() 
-solution()
+if __name__ == '__main__':
+    main()
