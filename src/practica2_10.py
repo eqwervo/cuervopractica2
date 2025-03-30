@@ -1,4 +1,4 @@
-# Importo la base de datos de rondas
+# Importo la "base de datos" de rondas
 from src import roundsdb
 
 # Funciones
