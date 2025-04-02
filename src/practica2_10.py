@@ -18,7 +18,6 @@ def process_round(round, players, round_score, score_max):
     
     # Recorre por clave valor los items de round y asigna puntajes y estadisticas
     for player, value in round.items():
-            # print(f'player x ronda{player}')
             players[player]['kills'] += value['kills']
             players[player]['assists'] += value['assists']
             round_score = value['kills'] * 3 + value['assists']
