@@ -1,5 +1,6 @@
 Esteban Cuervo
 17948/3
+cuervoesteban87@gmail.com
 
 
 1. Creacion del entorno virtual
